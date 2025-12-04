@@ -105,7 +105,7 @@ class HomeScreen extends StatelessWidget {
                   border: Border.all(color: Colors.teal, width: 2),
                 ),
                 child: const Text(
-                  "This is a decorated container",
+                  "Hello, it's me Joysree",
                   style: TextStyle(fontSize: 16, color: Colors.black87),
                 ),
               ),
