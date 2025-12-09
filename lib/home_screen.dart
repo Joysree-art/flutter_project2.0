@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterproject/about_page.dart';
+import 'package:flutterproject/converter_page.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -42,6 +43,17 @@ class HomeScreen extends StatelessWidget {
               );
             },
           ),
+          ListTile(
+            leading: const Icon(Icons.swap_horiz),
+            title: const Text("Converter Page"),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ConverterPage()),
+              );
+            },
+          ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -69,25 +81,31 @@ class HomeScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const AboutPage()),
+                      );
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.teal,
                       fixedSize: const Size(130, 40),
                     ),
-                    child: const Text("Click Me"),
+                    child: const Text("About Page"),
                   ),
                   const SizedBox(width: 20),
-                  OutlinedButton(
-                    onPressed: () {},
-                    child: const Text("Outlined"),
-                  ),
-                  const SizedBox(width: 20),
-                  TextButton(
-                    onPressed: () {},
-                    style: TextButton.styleFrom(
-                        backgroundColor: Colors.teal.shade200,
-                        foregroundColor: Colors.white),
-                    child: const Text("Text Btn"),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const ConverterPage()),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.teal,
+                      fixedSize: const Size(130, 40),
+                    ),
+                    child: const Text("Converter"),
                   ),
                 ],
               ),
@@ -125,7 +143,7 @@ class HomeScreen extends StatelessWidget {
                     child: Column(
                       children: [
                         const Text(
-                          "Flutter Card Widget",
+                          "Feature Highlight",
                           style: TextStyle(
                               fontSize: 18, fontWeight: FontWeight.bold),
                         ),
