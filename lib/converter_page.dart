@@ -13,14 +13,17 @@ class _ConverterPageState extends State<ConverterPage> {
   double result = 0;
 
   void convert() {
-    String value = controller.text;
+    String text = controller.text;
 
-    if (value.isEmpty) {
-      errorText = "Please enter an amount!";
+    if (text.isEmpty) {
+      errorText = "Field is empty!";
+      result = 0;
+    } else if (double.tryParse(text) == null) {
+      errorText = "Please enter number only!";
       result = 0;
     } else {
       errorText = null;
-      result = double.tryParse(value)! * 121.64;
+      result = double.parse(text) * 60;
     }
 
     setState(() {});
@@ -29,88 +32,80 @@ class _ConverterPageState extends State<ConverterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey.shade100, 
       appBar: AppBar(
-        title: const Text("Currency Converter"),
-        backgroundColor: Colors.teal,
         centerTitle: true,
+        backgroundColor: Colors.teal.shade700,
+        title: Text(
+          "Min → Sec Converter",
+          style: TextStyle(color: Colors.white),
+        ),
       ),
-
       body: Center(
         child: SizedBox(
           width: 350,
+          height: 380,
           child: Card(
-            elevation: 8,
-            shadowColor: Colors.teal,
-            color: Colors.teal.shade50,
+            color: Colors.blueGrey.shade700, 
+            elevation: 10,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
             child: Padding(
               padding: const EdgeInsets.all(20.0),
-
               child: Column(
-                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-
-                  // Title
-                  const Text(
-                    "USD → BDT Converter",
+                  Text(
+                    "Convert Minutes to Seconds",
                     style: TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
-                      color: Colors.teal,
+                      color: Colors.white,
                     ),
                   ),
-
-                  const SizedBox(height: 20),
-
-                  // Direction Row
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Text("USD", style: TextStyle(fontSize: 20)),
-                      SizedBox(width: 10),
-                      Icon(Icons.swap_horiz, color: Colors.teal),
-                      SizedBox(width: 10),
-                      Text("BDT", style: TextStyle(fontSize: 20)),
-                    ],
-                  ),
-
-                  const SizedBox(height: 20),
-
-                  // Input
+                  SizedBox(height: 20),
                   TextField(
-                    controller: controller,
                     keyboardType: TextInputType.number,
+                    controller: controller,
+                    style: TextStyle(color: Colors.white),
                     decoration: InputDecoration(
-                      prefixIcon: const Icon(Icons.monetization_on),
-                      labelText: "Enter USD Amount",
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
+                      prefixIcon: Icon(Icons.timer, color: Colors.white),
+                      labelText: "Enter Minutes",
+                      labelStyle: TextStyle(color: Colors.white70),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(50),
+                        borderSide: BorderSide(color: Colors.white70),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(50),
+                        borderSide: BorderSide(color: Colors.tealAccent),
                       ),
                       errorText: errorText,
+                      errorStyle: TextStyle(color: Colors.red.shade300),
                     ),
                   ),
-
-                  const SizedBox(height: 20),
-
-                  // Convert Button
+                  SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: convert,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.teal,
-                      fixedSize: const Size(130, 40),
+                      backgroundColor: Colors.teal.shade400,
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30)),
                     ),
-                    child: const Text("Convert"),
+                    child: Text(
+                      "Convert",
+                      style: TextStyle(fontSize: 16, color: Colors.white),
+                    ),
                   ),
-
-                  const SizedBox(height: 20),
-
-                  // Result
+                  SizedBox(height: 25),
                   Text(
-                    "BDT ${result.toStringAsFixed(2)}",
-                    style: const TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black87,
-                    ),
+                    "Output: $result Seconds",
+                    style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.teal.shade100,
+                        fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
